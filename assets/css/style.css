@@ -30,3 +30,8 @@ h1 {
   .column:last-child {
     border-right: none;
   }
+
+  #instructions {
+      text-align: center;
+      font-size: 20px;
+  }
