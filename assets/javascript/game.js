@@ -1,17 +1,71 @@
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-        't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var words = [
-    'all i want for christmas is you', 'jingle bell rock', 
-    'a holly jolly christmas', 'the christmas song', 'rudolph', 
-    'let it snow', 'feliz navidad', 'jingle bells', 'baby its cold outside'
+var listofWords = [
+        "jingle", "nutcracker", "grinch", "bells", "rudolph"
 ]
 
-var guessMe = words[Math.floor(Math.random() * words.length)];
+var computerRandIndex = Math.floor(Math.random() * listofWords.length);
+var computerPickWord = listofWords[computerRandIndex];
+var numberofGuessCount = 9;
+var wins = 0;
+var losses = 0;
+var wrongGuessLetter = "";
+var rightGuessLetter = "";
 
-var answerArray =[];
-for (var i = 0; i < guessMe; i++) {
- answerArray[i]="_";
+var boardGame = [];
+for (var i = 0; i < computerPickWord; i++) {
+        boardGame[i] = "_";
+}
+var userInput = "";
+
+
+function resetGame() {
+        var listofWords = [
+                "jingle", "nutcracker", "grinch", "bells", "rudolph"
+        ]
+        
+        var computerRandIndex = Math.floor(Math.random() * listofWords.length);
+        var computerPickWord = listofWords[computerRandIndex];
+        var numberofGuessCount = 9;
+        var wins = 0;
+        var losses = 0;
+        var wrongGuessLetter = "";
+        var rightGuessLetter = "";
+        
+        var boardGame = [];
+        for (var i = 0; i < computerPickWord; i++) {
+                boardGame[i] = "_";
+        }
+        var userInput = "";     
 }
 
-var remainingLetters = guessMe.length;
+
+// This function is run whenever the user presses a key.
+document.onkeyup = function (event) {
+        userInput = event.key.toLowerCase();
+        var displayBoardDiv = document.getElementbyID("output");
+        displayBoardDiv.textContent = boardGame.join(" ");
+
+        if (computerPickWord.indexOf(userInput) > -1) {
+                boardGame[computerPickWord.indexOf(userInput)] = userInput;
+                displayBoardDiv.textContent = boardGame.join(" ");
+                rightGuessLetter = rightGuessLetter + userInput;
+                // why do i get this error?
+                if (computerPickWord === rightGuessLetter && rightGuessLetter ==== "rudolph") {
+                        document.getElementById("Rudolph").play();
+                        wins++;
+                        resetGame();
+
+                }
+
+        }
+        else {
+                numberofGuessCount = numberofGuessCount - 1;
+                wrongGuessLetter = wrongGuessLetter + userInput + ", ";
+                var outputWrongDiv = document.getElementbyID("wrongGuess");
+                outputWrongDiv.textContext = wrongGuessLetter;
+                if (numberofGuessCount === 0) {
+                        loss++;
+                        resetGame();
+                }
+        }
+
+}

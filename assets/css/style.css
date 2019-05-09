@@ -1,5 +1,6 @@
 body {
     font-family: 'Mountains of Christmas', cursive;
+    color: white;
 }
 
 h1 {
@@ -34,4 +35,10 @@ h1 {
   #instructions {
       text-align: center;
       font-size: 20px;
+  }
+
+  #output, #wrongGuess {
+    height: 50px;
+    color: white;
+    font-size: 16px;
   }
