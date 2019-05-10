@@ -37,8 +37,13 @@ h1 {
       font-size: 20px;
   }
 
-  #output, #wrongGuess {
-    height: 50px;
+  #output, #wins, #space {
+    /* height: 100px; */
     color: white;
-    font-size: 16px;
+    /* font-size: 16px; */
+    margin: 25px;
+  }
+
+  #output {
+
   }
