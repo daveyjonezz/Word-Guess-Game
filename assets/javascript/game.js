@@ -19,7 +19,14 @@ var userInput = "";
 var guessedLetters = [];
 var guessingWord = [];
 
+var songstoPlay = [
+        document.getElementById("Jingle"), document.getElementById("Nutcracker"), document.getElementById("Grinch"),
+        document.getElementById("Bells"), document.getElementById("Rudoplh"),
+];
+var victorySong = songstoPlay[computerRandIndex];
+
 function resetGame() {
+        // victorySong.pause();
         listofSongs = [
                 "jingle", "nutcracker", "grinch", "bells", "rudolph"
         ];
@@ -29,12 +36,15 @@ function resetGame() {
         wrongGuessLetter = "";
         rightGuessLetter = "";
         boardGame = [];
-        boardGame = [];
         for (var i = 0; i < computerPickWord.length; i++) {
                 boardGame[i] = "_";
         }
         userInput = "";
-        
+        var songstoPlay = [
+                document.getElementById("Jingle"), document.getElementById("Nutcracker"), document.getElementById("Grinch"),
+                document.getElementById("Bells"), document.getElementById("Rudoplh"),
+        ];
+        victorySong = songstoPlay[computerRandIndex];
 };
 
 
@@ -46,7 +56,11 @@ document.onkeyup = function (event) {
 
         var displayBoardDiv = document.getElementById("output");
         displayBoardDiv.innerText = boardGame.join(" ");
-        document.getElementById("Rudolph").pause();
+        // document.getElementById("Rudoplh").pause();
+        // document.getElementById("Bells").pause();
+        // document.getElementById("Nutcracker").pause();
+        // document.getElementById("Grinch").pause();
+        // document.getElementById("Jingle").pause();
         if (computerPickWord.indexOf(userInput) > -1) {
                 boardGame[computerPickWord.indexOf(userInput)] = userInput;
                 displayBoardDiv.innerText = boardGame.join(" ");
@@ -56,20 +70,14 @@ document.onkeyup = function (event) {
                         }
                 }
                 rightGuessLetter = rightGuessLetter + userInput;
-                if (boardGame.indexOf("_") === -1 && userInput.indexOf("p")) {
-                        document.getElementById("Rudolph").play();
+                if (boardGame.indexOf("_") === -1) {
+                        victorySong.play();
                         wins++;
                         winsText.innerText = "Wins:" + wins;
                         resetGame();
                         document.getElementById("wrong").innerText = "";
-                       
-                } else if (boardGame.indexOf("_") === -1 && userInput.indexOf("j")) {
-                        document.getElementById("Jingle").play();
-                        wins++;
-                        winsText.innerText = "Wins:" + wins;
-                        resetGame();
-                        document.getElementById("wrong").innerText = "";
-                      } 
+
+                }
 
         }
         else {
