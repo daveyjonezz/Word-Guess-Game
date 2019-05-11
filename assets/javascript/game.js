@@ -19,14 +19,7 @@ var userInput = "";
 var guessedLetters = [];
 var guessingWord = [];
 
-var songstoPlay = [
-        document.getElementById("Jingle"), document.getElementById("Nutcracker"), document.getElementById("Grinch"),
-        document.getElementById("Bells"), document.getElementById("Rudoplh"),
-];
-var victorySong = songstoPlay[computerRandIndex];
-
 function resetGame() {
-        // victorySong.pause();
         listofSongs = [
                 "jingle", "nutcracker", "grinch", "bells", "rudolph"
         ];
@@ -40,11 +33,6 @@ function resetGame() {
                 boardGame[i] = "_";
         }
         userInput = "";
-        var songstoPlay = [
-                document.getElementById("Jingle"), document.getElementById("Nutcracker"), document.getElementById("Grinch"),
-                document.getElementById("Bells"), document.getElementById("Rudoplh"),
-        ];
-        victorySong = songstoPlay[computerRandIndex];
 };
 
 
@@ -56,11 +44,8 @@ document.onkeyup = function (event) {
 
         var displayBoardDiv = document.getElementById("output");
         displayBoardDiv.innerText = boardGame.join(" ");
-        // document.getElementById("Rudoplh").pause();
-        // document.getElementById("Bells").pause();
-        // document.getElementById("Nutcracker").pause();
-        // document.getElementById("Grinch").pause();
-        // document.getElementById("Jingle").pause();
+        //get element by class
+        document.getElementById("song").pause();
         if (computerPickWord.indexOf(userInput) > -1) {
                 boardGame[computerPickWord.indexOf(userInput)] = userInput;
                 displayBoardDiv.innerText = boardGame.join(" ");
@@ -71,7 +56,8 @@ document.onkeyup = function (event) {
                 }
                 rightGuessLetter = rightGuessLetter + userInput;
                 if (boardGame.indexOf("_") === -1) {
-                        victorySong.play();
+                        document.getElementById("song").src=`./assets/audio/${computerPickWord}.mp3`;
+                        document.getElementById("song").play();
                         wins++;
                         winsText.innerText = "Wins:" + wins;
                         resetGame();
