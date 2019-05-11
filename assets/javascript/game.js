@@ -1,3 +1,6 @@
+// A majority of the code was taken from Phil's psuedo code.
+// Some code was inspired from this website: http://danorlovsky.tech/Articles/Javascript-Hangman-Tutorial
+
 var listofSongs = [
         "jingle", "nutcracker", "grinch", "bells", "rudolph"
 ];
@@ -16,8 +19,6 @@ for (var i = 0; i < computerPickWord.length; i++) {
         boardGame[i] = "_";
 }
 var userInput = "";
-var guessedLetters = [];
-var guessingWord = [];
 
 function resetGame() {
         listofSongs = [
@@ -34,11 +35,11 @@ function resetGame() {
         }
         userInput = "";
 };
-
+document.getElementById("clickMe").onclick = resetGame();
 
 // This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
-
+        
         userInput = event.key.toLowerCase();
 
 
@@ -80,3 +81,4 @@ document.onkeyup = function (event) {
         };
 
 };
+
