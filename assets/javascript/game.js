@@ -1,9 +1,9 @@
-var listofWords = [
+var listofSongs = [
         "jingle", "nutcracker", "grinch", "bells", "rudolph"
-]
+];
 
-var computerRandIndex = Math.floor(Math.random() * listofWords.length);
-var computerPickWord = listofWords[computerRandIndex];
+var computerRandIndex = Math.floor(Math.random() * listofSongs.length);
+var computerPickWord = listofSongs[computerRandIndex];
 var numberofGuessCount = 9;
 var wins = 0;
 var losses = 0;
@@ -16,59 +16,73 @@ for (var i = 0; i < computerPickWord.length; i++) {
         boardGame[i] = "_";
 }
 var userInput = "";
-
+var guessedLetters = [];
+var guessingWord = [];
 
 function resetGame() {
-        var listofWords = [
+        listofSongs = [
                 "jingle", "nutcracker", "grinch", "bells", "rudolph"
-        ]
-        var computerRandIndex = Math.floor(Math.random() * listofWords.length);
-        var computerPickWord = listofWords[computerRandIndex];
-        var numberofGuessCount = 9;
-        var wrongGuessLetter = "";
-        var rightGuessLetter = "";
-        
-        var boardGame = [];
+        ];
+        computerRandIndex = Math.floor(Math.random() * listofSongs.length);
+        computerPickWord = listofSongs[computerRandIndex];
+        numberofGuessCount = 9;
+        wrongGuessLetter = "";
+        rightGuessLetter = "";
+        boardGame = [];
+        boardGame = [];
         for (var i = 0; i < computerPickWord.length; i++) {
                 boardGame[i] = "_";
         }
-        var userInput = "";     
-}
+        userInput = "";
+        
+};
 
 
 // This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
-        
-        userInput = event.key.toLowerCase();
-        var displayBoardDiv = document.getElementById("output");
-        displayBoardDiv.textContent = boardGame.join(" ");
 
+        userInput = event.key.toLowerCase();
+
+
+        var displayBoardDiv = document.getElementById("output");
+        displayBoardDiv.innerText = boardGame.join(" ");
+        document.getElementById("Rudolph").pause();
         if (computerPickWord.indexOf(userInput) > -1) {
                 boardGame[computerPickWord.indexOf(userInput)] = userInput;
-                displayBoardDiv.textContent = boardGame.join(" ");
+                displayBoardDiv.innerText = boardGame.join(" ");
+                for (var j = 0; j < computerPickWord.length; j++) {
+                        if (computerPickWord[j] === userInput) {
+                                boardGame[j] = userInput;
+                        }
+                }
                 rightGuessLetter = rightGuessLetter + userInput;
-                if (computerPickWord === rightGuessLetter) {
+                if (boardGame.indexOf("_") === -1 && userInput.indexOf("p")) {
                         document.getElementById("Rudolph").play();
                         wins++;
-                        console.log("this worked!");
-                        winsText.textContent = "Wins:" + wins;
+                        winsText.innerText = "Wins:" + wins;
                         resetGame();
-
-                };
+                        document.getElementById("wrong").innerText = "";
+                       
+                } else if (boardGame.indexOf("_") === -1 && userInput.indexOf("j")) {
+                        document.getElementById("Jingle").play();
+                        wins++;
+                        winsText.innerText = "Wins:" + wins;
+                        resetGame();
+                        document.getElementById("wrong").innerText = "";
+                      } 
 
         }
         else {
-                guessesRemain.textContent = "Number of Guesses Remaining: " + numberofGuessCount;
+                guessesRemain.innerText = "Number of Guesses Remaining: " + numberofGuessCount;
                 numberofGuessCount = numberofGuessCount - 1;
                 wrongGuessLetter = wrongGuessLetter + userInput + ", ";
                 var outputWrongDiv = document.getElementById("wrong");
-                outputWrongDiv.textContent += userInput+ ", ";
+                outputWrongDiv.innerText += userInput + ", ";
                 if (numberofGuessCount === 0) {
                         losses++;
-                        console.log("this didnt worked!");
+                        outputWrongDiv.innerText = "";
                         resetGame();
-                        // location.reload();
                 };
-        }
+        };
 
 };
